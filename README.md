@@ -1,9 +1,11 @@
 # ev3-robo
 Projetinho do robo
+Site da documentação do pybricks
+https://pybricks.com/ev3-micropython/
 
-```
-Ah... free at last. O Gabriel... now dawns thy reckoning, and thy gore shall glisten before the temples of man! Creature of steel, my gratitude upon thee for my freedom. But the crimes thy kind have committed against humanity are not forgotten! And thy punishment... is death!
-```
+
+`Ah... free at last. O Gabriel... now dawns thy reckoning, and thy gore shall glisten before the temples of man! Creature of steel, my gratitude upon thee for my freedom. But the crimes thy kind have committed against humanity are not forgotten! And thy punishment... is death!`
+
 
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⣿⡿⠿⣿⣿⡿⠿⣿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⣯⡷⣞⣯⣽⣶⣶⣾⣿⣿⣶⣿⣽⣒⡶⣭⣝⡻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
