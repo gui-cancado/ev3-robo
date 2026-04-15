@@ -34,8 +34,8 @@ wait(1000)
 
 
 KP = 0.5
-KI = 0.02
-KD = 0.5
+KI = 0.01
+KD = 0.35
 
 INTEGRAL_MAX = 300
 BASE_SPEED   = 25
@@ -65,7 +65,7 @@ while True:
 
 
     turn = (KP * error) + (KI * integral) + (KD * derivative)
-    turn = max(min(turn, 30), -30)
+    turn = max(min(turn, 35), -35)
 
     motor_a.dc(BASE_SPEED - turn)
     motor_d.dc(BASE_SPEED + turn)
