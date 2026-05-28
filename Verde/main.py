@@ -1,7 +1,7 @@
 #!/usr/bin/env pybricks-micropython
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import Motor, ColorSensor
-from pybricks.parameters import Port, Button
+from pybricks.parameters import Port, Button, Color
 from pybricks.tools import wait, StopWatch
 from verde import *
 
@@ -36,7 +36,7 @@ wait(1000)
 
 # === PARÂMETROS PID ===
 KP           = 0.5
-KI           = 0.01
+KI           = 0.03
 KD           = 0.35
 INTEGRAL_MAX = 350
 BASE_SPEED   = 25
@@ -52,7 +52,50 @@ ev3.screen.print("SEGUINDO LINHA")
 ev3.speaker.beep(1500, 100)
 wait(300)
 ev3.speaker.beep(2000, 100)
+score = 0
+score_final = 0
+def correcao_verde_azul():
+    global score_final
+    global action
+    if color_sensor.color() == Color.GREEN:
+        score+=2
+    elif color_sensor.color() == Color.BLUE:
+        score+=1
+    else:
+        score-=1
+    
+    if action != 'RETO':
+        score = 0
+   
+    if score < 0:
+        score = 0
+    elif score > 10: score = 10
+    
+    return score
 
+
+action = ''
+
+def verde_check():
+    global score
+    global action
+    #if action == 'RETO':
+    #    wait(500)
+    #if action == 'RETO':
+    #    #if color_sensor.color() == Color.GREEN or Color.BLUE:
+    if score > 8  and line_sensor.reflection() < (black*1.25):
+        retorno_180()
+        action = '180 Caralho'
+        score = 0
+    elif score > 8:
+        virar_esquerda()
+        action = 'TurnLeft'
+        score = 0
+        #elif (color_sensor.color() == Color.GREEN or Color.BLUE) and line_sensor.reflection() < 20 :
+        #elif correcao_verde_azul() > 5 and line_sensor.reflection() < 20:
+        #    retorno_180()
+
+#score = 0
 while True:
     timer.reset()
 
@@ -78,12 +121,28 @@ while True:
     motor_b.dc(BASE_SPEED + turn)
 
     
+    #score = 0
+    if color_sensor.color() == Color.GREEN:
+        score+=2
+    elif color_sensor.color() == Color.BLUE:
+        score+=1
+    else:
+        score-=1
+   
+    if score < 0:
+        score = 0
+    elif score > 10:
+        score = 10
+    
+
+    
+    
     # Display a cada 10 ciclos (~100ms)
     loop_count += 1
     if loop_count % 10 == 0:
         #action = "RETO" if abs(turn) < 10 else "CURVA"
         if abs(turn) < 10 and abs(turn) >= 0:
-            action = 'Straight'
+            action = 'RETO'
         elif turn < 0:
             action = 'turnRight'
         else:
@@ -94,11 +153,13 @@ while True:
         ev3.screen.print("Err:", round(error, 1))
         ev3.screen.print("Turn:", round(turn, 1))
         ev3.screen.print("Acao:", action)
+        ev3.screen.print("Score: ", score)
+        ev3.screen.print("Cor: ", color_sensor.color())
 
     # VERDE
-    verde_check(action)
+    verde_check()
     
-
+    #correcao_verde_azul()
     # Parada por botão
     if Button.CENTER in ev3.buttons.pressed():
         motor_a.dc(0)
@@ -107,6 +168,7 @@ while True:
         ev3.screen.print("PARADO!")
         ev3.speaker.beep(500, 300)
         break
+        False
 
     # Ciclo fixo
     elapsed = timer.time()
