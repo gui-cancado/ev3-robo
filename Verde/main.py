@@ -36,9 +36,9 @@ wait(1000)
 
 # === PARÂMETROS PID ===
 KP           = 0.5
-KI           = 0.03
+KI           = 0.01
 KD           = 0.35
-INTEGRAL_MAX = 350
+INTEGRAL_MAX = 300
 BASE_SPEED   = 25
 CYCLE_MS     = 10          # Tempo de ciclo fixo em ms
 
